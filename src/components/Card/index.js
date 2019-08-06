@@ -8,7 +8,7 @@ import { Container, Label } from './styles';
 export default function Card({ data, index, listIndex }) {
   const ref = useRef();
   const { move } = useContext(BoardContext);
-
+  let memTime = 0;
   const [{ isDragging }, dragRef] = useDrag({
     item: { type: 'CARD', index, listIndex },
     collect: monitor => ({
@@ -19,6 +19,9 @@ export default function Card({ data, index, listIndex }) {
   const [, dropRef] = useDrop({
     accept: 'CARD',
     hover(item, monitor) {
+      var date = new Date();
+      var now = date.getTime();
+      if(memTime == 0) memTime = now;
       const draggedListIndex = item.listIndex;
       const targetListIndex = listIndex;
 
@@ -38,15 +41,15 @@ export default function Card({ data, index, listIndex }) {
       if (draggedIndex < targetIndex && draggedTop < targetCenter) {
         return;
       }
-
       if (draggedIndex > targetIndex && draggedTop > targetCenter) {
         return;
       }
-
-      move(draggedListIndex, targetListIndex, draggedIndex, targetIndex);
-
-      item.index = targetIndex;
-      item.listIndex = targetListIndex;
+      if((now - memTime) >= 300 || draggedListIndex == targetListIndex){
+        move(draggedListIndex, targetListIndex, draggedIndex, targetIndex,'card');
+        item.index = targetIndex;
+        item.listIndex = targetListIndex;
+        memTime = 0;
+      }
     }
   })
 
