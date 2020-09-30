@@ -7,7 +7,7 @@ export const Container = styled.div`
   opacity: ${props => props.done ? 0.6 : 1};
 
   & + div {
-    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    border-left: 1px solid ${ ({ theme }) => theme.divBorder };
   }
 
   header {
@@ -26,9 +26,10 @@ export const Container = styled.div`
       width: 42px;
       height: 42px;
       border-radius: 18px;
-      background: #3b5bfd;
+      background: ${ ({ theme }) => theme.secondary };
       border: 0;
       cursor: pointer;
+      transition: all 200ms ease-in-out;
     }
   }
 

@@ -2,13 +2,14 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
-  background: #FFF;
+  background: ${ ({ theme }) => theme.cardBackground };
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 15px;
-  box-shadow: 0 1px 4px 0 rgba(192, 208, 230, 0.8);
-  border-top: 20px solid rgba(230, 236, 245, 0.4);
+  box-shadow: 0 1px 4px 0 ${ ({ theme }) => theme.shadow };
+  border-top: 20px solid ${ ({ theme }) => theme.cardTopBorder };
   cursor: grab;
+  transition: all 200ms ease-in-out;
 
   header {
     position: absolute;
@@ -29,7 +30,7 @@ export const Container = styled.div`
   }
 
   ${props => props.isDragging && css`
-    border: 2px dashed rgba(0, 0, 0, 0.2);
+    border: 2px dashed ${ ({ theme }) => theme.dashedBorder };
     padding-top: 31px;
     border-radius: 0;
     background: transparent;

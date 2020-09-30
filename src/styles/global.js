@@ -16,12 +16,22 @@ export default createGlobalStyle`
 
   body {
     font: 14px 'Roboto', sans-serif;
-    background: #ecf1f8;
-    color: #333;
+    background: ${ ({ theme }) => theme.background };
+    color: ${ ({ theme }) => theme.secondaryText };
     -webkit-font-smoothing: antialiased !important;
+    transition: all 200ms ease-in-out;
   }
 
   ul {
     list-style: none;
+  }
+
+  span.toggleTheme {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    color: ${ ({ theme }) => theme.primaryText };
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
   }
 `;
